@@ -1,3 +1,11 @@
+FROM maven:3.9.6-eclipse-temurin:21-jdk-alpine AS build
+
+WORKDIR /app
+
+COPY . .
+
+RUN mvn clean package -DskipTests
+
 FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
@@ -5,6 +13,6 @@ WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
-COPY target/*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
