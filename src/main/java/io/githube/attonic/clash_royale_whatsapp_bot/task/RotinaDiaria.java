@@ -31,17 +31,17 @@ public class RotinaDiaria {
             if (noticia != null){
                 boolean jaFoiEnviada = noticiaRepository.existsByTitulo(noticia.getTitulo());
                 if (!jaFoiEnviada){
-                    log.info("Nova noticia encontrada." + noticia);
+                    log.info("Nova notícia encontrada. {}", noticia);
                     whatsappService.enviarNoticia(noticia);
                     noticiaRepository.save(new NoticiaHistorico(noticia.getTitulo()));
                 }else {
-                    log.info("Noticia repetida. Já enviada." + noticia.getTitulo());
+                    log.info("Notícia repetida. Já enviada. {}", noticia.getTitulo());
                 }
             }
         }catch (BotClashException e){
-            log.error("Alerta: " + e.getMessage());
+            log.error("Alerta: {}", e.getMessage());
         } catch (Exception e){
-            log.error("Erro genérico no sistema! " + e.getMessage());
+            log.error("Erro genérico no sistema! {}", e.getMessage());
         }
     }
 

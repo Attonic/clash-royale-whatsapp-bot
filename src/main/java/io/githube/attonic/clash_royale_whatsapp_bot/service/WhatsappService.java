@@ -43,7 +43,7 @@ public class WhatsappService {
 
         try{
             var resposta = restTemplate.postForEntity(url, payload, String.class);
-            log.info("Status da resposta: " + resposta.getHeaders());
+            log.info("Status da resposta: {}",  resposta.getHeaders());
             log.info("Mensagem enviada com sucesso!");
         }catch (Exception e){
             throw new BotClashException("Erro ao mandar mensagem: ", e);

@@ -19,14 +19,14 @@ public class ClashNewsService {
     public Noticia buscarUltimaManchete(){
 
         try{
-            log.info("Conectando ao site: " + URL_SITE);
+            log.info("Conectando ao site: {}", URL_SITE);
 
             Document document = Jsoup.connect(URL_SITE)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64) AppleWebKit/537.36 (KHTML, like Gecko Chrome/120.0.0.0 Safari/537.36")
                     .timeout(5000)
                     .get();
 
-            log.info("Site carregado, Titulo da pagina: " + document.title());
+            log.info("Site carregando, Título da página: {}", document.title());
 
             Element element = document.select("h2-post-title a").first();
 
@@ -38,7 +38,7 @@ public class ClashNewsService {
             if (element != null){
                 String titulo = element.text();
                 String link = element.attr("href");
-                log.info("Manchete encontrada: " + titulo);
+                log.info("Manchete encontrada: {}", titulo);
                 return new Noticia(titulo, link);
             }else {
                 log.error("Nenhum elemento dos seletores encotrado.");
@@ -47,9 +47,9 @@ public class ClashNewsService {
         } catch (IOException e){
             throw new BotClashException("O Site caiu ou bloqueou o acesso.", e);
         }catch (Exception e){
-            throw new BotClashException("Erro desconhecido na leitura da noticia", e);
+            throw new BotClashException("Erro desconhecido na leitura da notícia", e);
         }
-        throw new BotClashException("Noticia não encontrada");
+        throw new BotClashException("Notícia não encontrada");
 
     }
 
