@@ -24,7 +24,7 @@ public class RotinaDiaria {
 
     @Scheduled(cron = "0 0 8 * * *", zone = "America/Sao_Paulo")
     public void verificarEnvio(){
-        log.info("Iniciando verificação de noticias...");
+        log.info("Iniciando verificação de notícias...");
         try {
             Noticia noticia = clashNewsService.buscarUltimaManchete();
 
