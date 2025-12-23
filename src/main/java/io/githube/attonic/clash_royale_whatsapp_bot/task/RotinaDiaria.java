@@ -22,7 +22,7 @@ public class RotinaDiaria {
     @Autowired
     private NoticiaRepository noticiaRepository;
 
-    @Scheduled(cron = "0 30 21 * * *", zone = "America/Sao_Paulo")
+    @Scheduled(cron = "0 0 8 * * *", zone = "America/Sao_Paulo")
     public void verificarEnvio(){
         log.info("Iniciando verificação de noticias...");
         try {
